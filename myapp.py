@@ -139,9 +139,32 @@ fig_adj.legend.click_policy = 'hide'
 fig_volume.legend.click_policy = 'hide'
 fig_high.legend.click_policy = 'hide'
 
-adj = Panel(child= fig_adj, title='Adjusted Close')
-vol = Panel(child= fig_volume, title='Volume')
-day = Panel(child= fig_high, title='High')
+#Date Range Slider for Adjusted Close
+date_slider_adj = DateRangeSlider(value=(min(newdf['Date']), max(newdf['Date'])),
+                              start=min(newdf['Date']),end=max(newdf['Date']),width=300)
+date_slider_adj.js_link('value', fig_adj.x_range, 'start', attr_selector=0)
+date_slider_adj.js_link('value', fig_adj.x_range, 'end', attr_selector=1)
+
+#Date Range Slider for Volume
+date_slider_volume = DateRangeSlider(value=(min(newdf['Date']), max(newdf['Date'])),
+                              start=min(newdf['Date']),end=max(newdf['Date']),width=300)
+date_slider_volume.js_link('value', fig_volume.x_range, 'start', attr_selector=0)
+date_slider_volume.js_link('value', fig_volume.x_range, 'end', attr_selector=1)
+
+#Date Range Slider for High
+date_slider_high = DateRangeSlider(value=(min(newdf['Date']), max(newdf['Date'])),
+                              start=min(newdf['Date']),end=max(newdf['Date']),width=300)
+date_slider_high.js_link('value', fig_high.x_range, 'start', attr_selector=0)
+date_slider_high.js_link('value', fig_high.x_range, 'end', attr_selector=1)
+
+#layout
+layout_1 = row(date_slider_adj, fig_adj)
+layout_2 = row(date_slider_volume, fig_volume)
+layout_3 = row(date_slider_high, fig_high)
+
+adj = Panel(child= layout_1, title='Adjusted Close')
+vol = Panel(child= layout_2, title='Volume')
+day = Panel(child= layout_3, title='High')
 
 tabs = Tabs(tabs=[adj, vol, day])
 
