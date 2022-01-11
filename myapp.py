@@ -60,84 +60,22 @@ frame = [data, data1]
 df = pd.concat(frame)
 df
 
-"""###Level 1
-
-Visualisasi data interaktif untuk menampilkan nilai “Adjusted Close” untuk setiap indeks 
-pasar saham. Aspek interaktif minimum yang harus dimunculkan adalah <br> 
-* default toolbar
-* hover.
-
-Teks yang muncul pada saat kursor diletakkan di atas titik data adalah
-* nama 
-indeks pasar saham 
-* nilai parameter
-"""
-
+#
 df['Name'].unique()
 
-condition = (df['Name'] == 'NYSE') | (df['Name'] == 'NASDAQ')
-Level_1 = df[condition]
-Level_1= Level_1.loc[:, ['Date','Name','Adjusted Close']]
-Level_1 = Level_1.sort_values(['Date', 'Name'])
-Level_1.head()
+newdf = df
+newdf = newdf.sort_values(['Date', 'Name'])
+newdf.head()
+
+# Isolate the data 
+nyse = newdf[newdf['Name'] == 'NYSE']
+nasdaq = newdf[newdf['Name'] == 'NASDAQ']
 
 output_notebook()
 
 # Output to file
-output_file('Level_1.html', 
-            title='Nilai Adjusted Close untuk setiap indeks pasar saham')
-
-# Isolate the data
-nyse = Level_1[Level_1['Name'] == 'NYSE']
-nasdaq = Level_1[Level_1['Name'] == 'NASDAQ']
-
-# Create a ColumnDataSource object 
-nyse_cds = ColumnDataSource(nyse)
-nasdaq_cds = ColumnDataSource(nasdaq)
-
-tooltips = [('Name', '@Name'), ('Adjusted Close', '$y{0.2f}')]
-
-# Create and configure the figure
-fig = figure(x_axis_type='datetime',
-             plot_height=500, plot_width=1000,
-             title='Nilai Adjusted Close untuk setiap indeks pasar saham',
-             x_axis_label='Date', y_axis_label='Adjusted Close', tooltips=tooltips)
-
-# Render 
-fig.line('Date', 'Adjusted Close', 
-         color='red', legend_label='NYSE',
-         line_width=1, 
-         source=nyse_cds)
-fig.line('Date', 'Adjusted Close', 
-         color='blue', legend_label='NASDAQ', 
-         line_width=1,
-         source=nasdaq_cds)
-
-
-# Move the legend 
-fig.legend.location = 'top_left'
-
-# Show the plot
-show(fig)
-
-"""###Level 2
-
-Lakukan semua instruksi pada kasus level 1. Tambahkan aspek interaktif yang
-memungkinkan user memilih parameter yang akan ditampilkan: 
-* Adjusted Close, 
-* Volume, 
-* High.<br>
-
-Nilai parameter yang muncul pada hover tool harus disesuaikan dengan parameter yang dipilih.
-"""
-
-Level_2 = df
-Level_2 = Level_2.sort_values(['Date', 'Name'])
-Level_2.head()
-
-# Isolate the data 
-nyse = Level_2[Level_2['Name'] == 'NYSE']
-nasdaq = Level_2[Level_2['Name'] == 'NASDAQ']
+output_file('index.html', 
+            title='Nilai Adjusted Close, Volume, High untuk setiap indeks pasar saham')
 
 # Create a ColumnDataSource object
 nyse_cds = ColumnDataSource(nyse)
@@ -155,6 +93,7 @@ fig_volume = figure(x_axis_type='datetime',
              plot_height=500, plot_width=1000,
              title='Nilai Adjusted Close untuk setiap indeks pasar saham',
              x_axis_label='Date', y_axis_label='Volume', tooltips=tooltips)
+
 fig_high = figure(x_axis_type='datetime',
              plot_height=500, plot_width=1000,
              title='Nilai Adj CLose untuk setiap indeks pasar saham',
@@ -195,44 +134,16 @@ fig_adj.legend.location = 'top_left'
 fig_volume.legend.location = 'top_left'
 fig_high.legend.location = 'top_left'
 
-from bokeh.io import output_file
-from bokeh.models.widgets import Tabs, Panel
-
-output_notebook()
-
-# Output to file
-output_file('Level_2.html', 
-            title='Nilai Adjusted Close, Volume, High untuk setiap indeks pasar saham')
+# Add interactivity to the legend
+fig_adj.legend.click_policy = 'hide'
+fig_volume.legend.click_policy = 'hide'
+fig_high.legend.click_policy = 'hide'
 
 adj = Panel(child= fig_adj, title='Adjusted Close')
 vol = Panel(child= fig_volume, title='Volume')
 day = Panel(child= fig_high, title='High')
 
 tabs = Tabs(tabs=[adj, vol, day])
-
-show(tabs)
-
-"""###Level 3
-
-Lakukan semua instruksi pada kasus level 1 dan 2. Tambahkan aspek interaktif yang
-memungkinkan user untuk menyembunyikan data untuk indeks pasar saham tertentu dengan
-mengklik legend dari indeks tersebut.
-"""
-
-adj = Panel(child= fig_adj, title='Adjusted Close')
-vol = Panel(child= fig_volume, title='Volume')
-day = Panel(child= fig_high, title='High')
-
-output_notebook()
-
-# Output to file
-output_file('Level_3.html', 
-            title='Nilai Adjusted Close, Volume, High untuk setiap indeks pasar saham')
-
-# Add interactivity to the legend
-fig_adj.legend.click_policy = 'hide'
-fig_volume.legend.click_policy = 'hide'
-fig_high.legend.click_policy = 'hide'
 
 # Visualize
 show(tabs)
