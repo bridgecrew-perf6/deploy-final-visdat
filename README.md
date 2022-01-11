@@ -1,6 +1,4 @@
-# **STOCK MARKET MODEL**
-
-# Final Project Assignment
+# Final Project Assignment - STOCK MARKET MODEL
 
 ## Visualisasi Data IF-42-GAB01 [IKN]
 
