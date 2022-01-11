@@ -28,6 +28,7 @@ from bokeh.plotting import figure, show
 from bokeh.models import ColumnDataSource
 from bokeh.layouts import row, column, gridplot
 from bokeh.models.widgets import Tabs, Panel
+from bokeh.models.widgets.sliders import DateRangeSlider
 
 """Data set yang digunakan pada tugas besar 2 ini adalah data time series dari beberapa<br>
 parameter saham yang terdiri dari:<br>
