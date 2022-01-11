@@ -23,7 +23,7 @@ import pandas as pd
 import numpy as np
 
 # Bokeh libraries
-from bokeh.io import output_file, output_notebook
+from bokeh.io import output_file, output_notebook, curdoc
 from bokeh.plotting import figure, show
 from bokeh.models import ColumnDataSource
 from bokeh.layouts import row, column, gridplot
