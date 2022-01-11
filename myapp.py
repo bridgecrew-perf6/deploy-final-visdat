@@ -41,12 +41,12 @@ parameter saham yang terdiri dari:<br>
 * Name: Indeks pasar saham
 """
 
-data = pd.read_csv('NYSE.csv', parse_dates=['Date'])
+data = pd.read_csv('data/NYSE.csv', parse_dates=['Date'])
 data
 
 data["Name"] = "NYSE"
 
-data1 = pd.read_csv('NASDAQ.csv', parse_dates=['Date'])
+data1 = pd.read_csv('data/NASDAQ.csv', parse_dates=['Date'])
 data1
 
 data1["Name"] = "NASDAQ"
