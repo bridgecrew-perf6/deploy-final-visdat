@@ -145,5 +145,5 @@ day = Panel(child= fig_high, title='High')
 
 tabs = Tabs(tabs=[adj, vol, day])
 
-# Visualize
-show(tabs)
+# Run
+curdoc().add_root(tabs)
