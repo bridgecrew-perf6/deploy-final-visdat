@@ -1,12 +1,17 @@
-# **STOCK MODEL**
+# **STOCK MARKET MODEL**
+
+# Final Project Assignment
+
+## Visualisasi Data IF-42-GAB01 [IKN]
+
+Nama Anggota Kelompok:
+*   Liyan Fajar Ramadhan
+*   Hanif Reangga
+*   Irfani Adri Maulana
 
 ## Deskripsi Singkat <br>
-Model ini akan menampilkan visualisasi interaktif dari data saham dengan menggunakan bokeh 
-
-## Folder, file dan kegunaan <br>
--	index.html --> Berisi template website
--	myapp.py --> Berisi konfigurasi route untuk API
--	
+Model ini akan menampilkan visualisasi interaktif dari data saham dengan menggunakan bokeh
+Dataset diambil dari: https://www.kaggle.com/paultimothymooney/stock-market-data
 
 ## Akses melalui website <br>
 -	Buka URL menggunakan browser yang dimiliki, dengan menggunakan link https://
